@@ -37,6 +37,12 @@ jobs:
       with:
         report_paths: '**/build/test-results/test/TEST-*.xml'
 
+    - name: Test Summary
+      uses: test-summary/action@v1
+      if: always()
+      with:
+        paths: '**/build/test-results/test/TEST-*.xml'
+
     - name: Add coverage comment
       id: jacoco
       uses: madrapps/jacoco-report@v1.2
