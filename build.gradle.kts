@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	jacoco
+	id("com.github.spotbugs") version "4.7.1"
 }
 
 group = "com.tkqlzz"
@@ -32,22 +33,21 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-}
-
-tasks.test {
 	finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
+
 tasks.jacocoTestReport {
 	dependsOn(tasks.test) // tests are required to run before generating the report
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+	}
 }
 
 jacoco {
 	toolVersion = "0.8.7"
 }
 
-tasks.jacocoTestReport {
-	reports {
-		xml.required.set(true)
-		html.required.set(true)
-	}
+tasks.withType<com.github.spotbugs.snom.SpotBugsTask>().configureEach {
+	ignoreFailures = true
 }

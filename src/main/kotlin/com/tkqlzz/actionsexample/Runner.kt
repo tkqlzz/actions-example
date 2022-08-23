@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component
 @Component
 class Runner : ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
+        var abc = "hi"
         println("hi")
     }
 }
