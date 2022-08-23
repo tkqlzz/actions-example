@@ -58,3 +58,9 @@ jobs:
       with:
         name: SpotBugs Report
         path: 'build/reports/spotbugs/main.xml'
+        
+    - name: Upload reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: reports
+        path: build/reports/
